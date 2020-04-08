@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen
+import time
 
 html = urlopen("https://offerup.com/search/?q=nintendo%20switch")
 s = html.read()
@@ -20,15 +21,17 @@ class newProduct():
         price_box = soup.find('span', attrs={'class':'_s3g03e4'})
     
     def comparePrices():
-        if a != price_box:
+        b = soup.find('span', attrs={'class':'_s3g03e4'})
+        if a != b:
             print("newItemFoundPog")
-            b = price_box
             print(price_box)
-        if a == price_box:
+        if a == b:
             print("no new item found")
-            print(price_box)
-         
+        
 if __name__ == "__main__":
     newProduct.declarationOfVariabels()
-    newProduct.findPrice()
-    newProduct.comparePrices()
+    while(True):
+        newProduct.declarationOfVariabels()
+        time.sleep(10)
+        newProduct.findPrice()
+        newProduct.comparePrices()
